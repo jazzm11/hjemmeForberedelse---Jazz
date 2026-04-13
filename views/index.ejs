@@ -1,0 +1,67 @@
+<%- include('partials/header') %>
+
+    <div class="container">
+        <h1>Hvilken fox er søtere?</h1>
+
+        <% if (message) { %>
+            <div class="message <%= message.includes('Kunne ikke') ? 'error' : 'success' %>">
+                <%= message %>
+            </div>
+            <% } %>
+
+                <div class="fox-container">
+                    <% if (fox1 && fox1.imageUrl && fox2 && fox2.imageUrl) { %>
+
+                        <div class="comparison-wrapper">
+                            <!-- Venstre fox -->
+                            <div class="fox-card">
+                                <div class="fox-image-wrapper">
+                                    <div id="loader1" class="image-loader">Laster...</div>
+                                    <img id="foxImage1" src="<%= fox1.imageUrl %>" alt="Fox 1" class="fox-image" />
+                                </div>
+                                <button class="btn btn-vote btn-left" data-side="left">
+                                    Denne er søtere!
+                                </button>
+                                <div class="vote-stats">
+                                    Stemmer: <span class="vote-count">
+                                        <%= fox1.votes %>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- VS divider -->
+                            <div class="vs-divider">VS</div>
+
+                            <!-- Høyre fox -->
+                            <div class="fox-card">
+                                <div class="fox-image-wrapper">
+                                    <div id="loader2" class="image-loader">Laster...</div>
+                                    <img id="foxImage2" src="<%= fox2.imageUrl %>" alt="Fox 2" class="fox-image" />
+                                </div>
+                                <button class="btn btn-vote btn-right" data-side="right">
+                                    Denne er søtere!
+                                </button>
+                                <div class="vote-stats">
+                                    Stemmer: <span class="vote-count">
+                                        <%= fox2.votes %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ny runde knapp -->
+                        <button id="newRoundButton" class="btn btn-new-round">
+                            Ny Runde
+                        </button>
+
+                        <div id="feedback" class="feedback"></div>
+
+                        <% } else { %>
+                            <p>Laster bilder...</p>
+                            <% } %>
+                </div>
+    </div>
+
+    <script src="/js/foxScript.js"></script>
+
+    <%- include('partials/footer') %>
