@@ -92,10 +92,12 @@ forberedelse-fox/
 ├── public/
 │   ├── css/
 │   │   └── main.css       # Styling
+|   |   └── stats.css      # Styling for stats.ejs
 │   └── js/
 │       └── foxScript.js   # Frontend logikk
 ├── views/
 │   ├── index.ejs          # Høvedside
+|   |__ stats.ejs          # Statistikk
 │   └── partials/
 │       ├── header.ejs     # Header
 │       └── footer.ejs     # Footer
@@ -110,8 +112,9 @@ forberedelse-fox/
 - ✅ Lagrer stemmer i MongoDB
 - ✅ Viser antall stemmer for hvert bilde
 - ✅ Smooth loading med animasjoner
-- ✅ Responsivt design (mobil-vennlig)
 - ✅ Enkel og ren brukergrensesnitt
+- ✅ Viser statistikken for de mest stemte ravene
+
 
 ## Teknologi
 

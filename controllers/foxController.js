@@ -1,13 +1,15 @@
 const Fox = require("../models/Fox");
 
+const API_URL = process.env.FOX_IMG_API_URL;
+
 // Hent to tilfeldige bilder fra API
 exports.getRandomFox = async (req, res) => {
   try {
-    const response1 = await fetch(process.env.FOX_IMG_API_URL);
+    const response1 = await fetch(API_URL);
     const data1 = await response1.json();
     const imageUrl1 = data1.image;
 
-    const response2 = await fetch(process.env.FOX_IMG_API_URL);
+    const response2 = await fetch(API_URL);
     const data2 = await response2.json();
     const imageUrl2 = data2.image;
 
@@ -22,7 +24,7 @@ exports.getRandomFox = async (req, res) => {
       },
       message: null,
     });
-    
+
   } catch (error) {
     console.error("Feil ved henting av fox-bilde:", error);
     res.status(500).render("index", {
@@ -85,10 +87,10 @@ exports.voteFox = async (req, res) => {
 // Hent to nye tilfeldige bilder (AJAX)
 exports.getNewFox = async (req, res) => {
   try {
-    const response1 = await fetch(process.env.FOX_IMG_API_URL);
+    const response1 = await fetch(API_URL);
     const data1 = await response1.json();
 
-    const response2 = await fetch(process.env.FOX_IMG_API_URL);
+    const response2 = await fetch(API_URL);
     const data2 = await response2.json();
 
     res.json({
@@ -101,6 +103,19 @@ exports.getNewFox = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Kunne ikke hente nye bilder",
+    });
+  }
+};
+
+exports.getStats = async (req, res) => {
+  try {
+    const foxes = await Fox.find().sort({ votes: -1 }).limit(20);
+    res.render("stats", { foxes, message: null });
+  } catch (error) {
+    console.error("Feil ved henting av statistikk:", error);
+    res.status(500).render("stats", {
+        foxes: [],
+        message: "Kunne ikke hente statistikk. Prøv igjen senere.",
     });
   }
 };

@@ -10,4 +10,7 @@ router.post('/api/fox/vote', foxController.voteFox);
 // API-rute for å hente nye bilder
 router.get('/api/fox/new', foxController.getNewFox);
 
+// Statistik side
+router.get('/stats', foxController.getStats);
+
 module.exports = router;

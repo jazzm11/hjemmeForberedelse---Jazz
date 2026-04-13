@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/stats.css">
+
+    <div class="container-stats">
+        <h1>Statistikk</h1>
+        <h2>De mest populære revene</h2>
+
+        <% if (message) { %>
+            <div class="message <%= message.includes('Kunne ikke') ? 'error' : 'success' %>">
+                <%= message %>
+            </div>
+        <% } %>
+
+
+        <div class="stats-container">
+            <% if (foxes.length > 0) { %>
+                <ol>
+                    <% foxes.forEach((fox) => { %>
+                        <% if (fox.votes > 0) { %>
+                            <li class="stats-item">
+                                <img src="<%= fox.imageUrl %>" alt="Fox" class="img-thumbnail">
+                                <span>Votes: <%= fox.votes %></span>
+                            </li>
+                        <% } %>
+
+                    <% }); %>
+                </ol>
+            <% } else { %>
+                <p>Ingen statistikk tilgjengelig.</p>
+            <% } %>
+        </div>
+
+        <a href="/" class="btn btn-back">Tilbake til avstemning</a>
+    </div>
+
+<%- include('partials/footer') %>
